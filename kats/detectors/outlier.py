@@ -16,7 +16,7 @@ import traceback
 from datetime import datetime
 from enum import Enum
 from importlib import import_module
-from typing import Any, cast, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, cast
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -187,7 +187,7 @@ class MultivariateAnomalyDetector(Detector):
         # pyre-fixme
         time_diff = data.time.sort_values().diff().dropna()
         if len(time_diff.unique()) == 1:  # check constant frequenccy
-            freq = time_diff.unique()[0].astype("int")
+            freq = time_diff.unique()[0].astype("int64")
             self.granularity_days: float = freq / (24 * 3600 * (10**9))
         else:
             raise RuntimeError(
